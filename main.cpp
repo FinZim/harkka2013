@@ -1,47 +1,59 @@
 /* 
  * @file main.cpp
- * Harkka2013 salaussofta
+ * SimpleCrypt salaussofta
  */
 
-#include <iostream>
 #include <windows.h>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
+#include <vector>
+
 #include "VigenereLib.h"
 
 using namespace std;
 
-/*int main(int argc, char** argv) {
+// Swap trick
+//template <typename T>
+//void FreeAll( T & t ) {
+//    T tmp;
+//    t.swap( tmp );
+//}
 
+//int my_main(vector<string> args){
+int main(int argc, char* argv[]){  
+    cout << "Welcome to SimpleCrypt" << endl;
+    
+    /*for (vector<string>::size_type i = 0; i < args.size(); i++){
+        cout << args.at(i) << endl;
+    }*/
+    for (int i = 0; i <= argc; i++){
+        cout << argv[i] << endl;
+    }
+    
+    string txt, output;
+    txt = "This is a string";
+    
+    VigenereClass vigenere;
+    output = vigenere.encrypt(txt);
+    
+    cout << output << endl;
+    
+    return 0;
+}
+
+/*int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
+    
+    istringstream iss(lpCmdLine);
+    vector<string> args;
+    copy(istream_iterator<string>(iss), istream_iterator<string>(), back_inserter<vector<string> >(args));
+    
+    my_main(args);
+    
+    args.clear();
+    
     return 0;
 }*/
-
-int __stdcall WinMain(HINSTANCE hInstance,
-                      HINSTANCE hPrevInstance,
-                      LPSTR lpCmdLine,
-                      int nCmdShow){
-    
-    LPWSTR *szArgList;
-    int argCount;
-    
-    szArgList = CommandLineToArgvW(GetCommandLine(), &argCount);
-    if(szArgList == NULL){
-        //MessageBox(NULL, L"Unable to parse command line", L"Error", MB_OK);
-        cout << "Unable to parse commandline" << endl;
-        return 10;
-    }
-    
-    for(int i = 0; i < argCount; i++){
-        //MessageBox(NULL, szArgList[i], L"Arglist contents", MB_OK);
-        cout << szArgList[i] << endl;
-    }
-    
-    LocalFree(szArgList);
-    
-    return 0;
-    
-    /*VigenereClass vigenere;
-    vigenere.encrypt();
-    
-    return 0;
-     */
-}
 

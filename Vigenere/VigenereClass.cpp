@@ -6,17 +6,23 @@
 
 #define VIGENERE_DLL
 
+#include <string>
+
 #include "VigenereClass.h"
-#include <iostream>
 
 using namespace std;
 
 string VigenereClass::encrypt(string txt){
     //this->key;
-    cout << "Vigenere encryption..." << endl;
+    
+    string text = "Vigenere encryption... ";
+    text.append(txt);
+    
+    return text;
 }
 
 string VigenereClass::decrypt(string txt){
     //this->key;
     cout << "Vigenere decryption..." << endl;
 }
+

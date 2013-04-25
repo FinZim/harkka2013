@@ -8,6 +8,7 @@
 #define	VIGENERECLASS_H
 
 #include <stdio.h>
+#include <iostream>
 #include <string>
 #include "libexport.h"
 
