@@ -1,18 +1,24 @@
 
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
 #include "stdafx.h"
 #include <iostream>
 #include <string>
 
 #include "VigenereLibDLL.h"
+#include "Registry.h"
+
+#define VERSION "v.0.1"
 
 using namespace std;
 
 int wmain(int argc, wchar_t *argv[], wchar_t *envp[]){
 
-	string method, key, algorithm, file, ver;
+	string method, key, algorithm, file;
 	bool help, version;
 
-	ver = "v.0.1";
 	help = false;
 	version = false;
 
@@ -63,10 +69,18 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[]){
 		cout << "<kim.kostera@student.lamk.fi, jarmo.erola@gmail.com>." << endl;
 		return 0;
 	} else if(version) {
-		cout << "SimpleCrypt " << ver << endl;
+		cout << "SimpleCrypt " << VERSION << endl;
 		return 0;
 	} else {
-		cout << "Welcome to SimpleCrypt " << ver << endl;
+		cout << "Welcome to SimpleCrypt " << VERSION << endl;
+
+		if(key != ""){
+			DWORD dKey, readedKey;
+
+			Registry reg(HKEY_CURRENT_USER, L"Software\\SimpleCrypt");
+			reg.write(L"DefaultKey", key.c_str());
+
+		}
 
 	}
 
