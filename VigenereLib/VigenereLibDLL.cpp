@@ -46,7 +46,7 @@ void Vigenere::setKey(string key){
 string Vigenere::encrypt(string txt){
 	string output;
 	string key = this->key;
- 
+	
 	for(int i = 0, j = 0; i < txt.length(); ++i){
 		char c = txt[i];
 	
@@ -60,7 +60,7 @@ string Vigenere::encrypt(string txt){
 		output += (c + key[j] - 2*'A') % 26 + 'A'; 
 		j = (j + 1) % key.length();
 	}
- 
+
 	return output;
 }
 

@@ -21,7 +21,7 @@ private:
 	 * Private variable to store a key 
 	 */
 	std::string key;
-public: 
+public:
 	/**
 	 * A constructor
 	 * @param key Default key for encryption.
