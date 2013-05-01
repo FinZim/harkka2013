@@ -1,3 +1,9 @@
+/* 
+ * @file VigenereLibDLL.cpp
+ * Vigenere DLL library resource file
+ * @author Jarmo Erola
+ * @version 0.1
+ */
 
 #include "stdafx.h"
 #include "VigenereLibDll.h"
@@ -9,6 +15,10 @@ using namespace std;
 
 namespace nsVigenere {
 
+	/**
+	 * A constructor
+	 * @param key Default key for encryption.
+	 */
 	Vigenere::Vigenere(char* key){
 
 		string strkey(key);
@@ -24,10 +34,18 @@ namespace nsVigenere {
 
 	}
 
+	/**
+	 * Sets a key to private variable
+	 * @param key A key.
+	 */
 	void Vigenere::setKey(char* _key){
 		this->key = _key;
 	}
 
+	/**
+	 * Encrypt given text
+	 * @param txt A text to encrypt.
+	 */
 	const char* Vigenere::encrypt(char* txt){
 		string out;
 		string strtxt(txt);
@@ -57,11 +75,15 @@ namespace nsVigenere {
 		return output;
 	}
 
+	/**
+	 * Decrypt given text
+	 * @param txt A text to decrypt.
+	 */
 	const char* Vigenere::decrypt(char* txt){
 		string out;
 		string strtxt(txt);
 
-		/*string key = this->key;
+		string key = this->key;
  
 		for(int i = 0, j = 0; i < strtxt.length(); ++i){
 			char c = strtxt[i];
@@ -76,7 +98,7 @@ namespace nsVigenere {
 			out += (c - key[j] + 26) % 26 + 'A'; 
 			j = (j + 1) % key.length();
 		}
- */
+ 
 		const char* output = out.c_str();
 		return output;
 	}
