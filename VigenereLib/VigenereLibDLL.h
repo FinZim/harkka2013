@@ -1,4 +1,4 @@
-/* 
+/** 
  * @file VigenereLibDLL.h
  * Vigenere DLL library header file
  * @author Jarmo Erola
@@ -11,37 +11,35 @@
 #define VIGENERELIBDLL_API __declspec(dllimport) 
 #endif
 
-namespace nsVigenere {
+/** 
+ * @class Vigenere
+ * @brief Vigenere encryption class for encrypting and decrypting data
+ */
+class __declspec (dllexport) Vigenere {
+private:
 	/** 
-	 * @class Vigenere
-	 * @brief Vigenere encryption class for encrypting and decrypting data
+	 * Private variable to store a key 
 	 */
-	class __declspec (dllexport) Vigenere {
-	private:
-		/** 
-		 * Private variable to store a key 
-		 */
-		char* key;
-	public: 
-		/**
-		 * A constructor
-		 * @param key Default key for encryption.
-		 */
-		Vigenere(char* key);
-		/**
-		 * Sets a key to private variable
-		 * @param key A key.
-		 */
-		void setKey(char* key);
-		/**
-		 * Encrypt given text
-		 * @param txt A text to encrypt.
-		 */
-		const char* encrypt(char* txt); 
-		/**
-		 * Decrypt given text
-		 * @param txt A text to decrypt.
-		 */
-		const char* decrypt(char* txt); 
-	};
-}
+	std::string key;
+public: 
+	/**
+	 * A constructor
+	 * @param key Default key for encryption.
+	 */
+	Vigenere(std::string key);
+	/**
+	 * Sets a key to private variable
+	 * @param key A key.
+	 */
+	void setKey(std::string key);
+	/**
+	 * Encrypt given text
+	 * @param txt A text to encrypt.
+	 */
+	std::string encrypt(std::string txt); 
+	/**
+	 * Decrypt given text
+	 * @param txt A text to decrypt.
+	 */
+	std::string decrypt(std::string txt); 
+};

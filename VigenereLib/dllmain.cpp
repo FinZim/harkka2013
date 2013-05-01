@@ -1,4 +1,10 @@
-// dllmain.cpp : Defines the entry point for the DLL application.
+/** 
+ * @file dllmain.cpp
+ * Vigenere DLL library main file. Defines the entry point for the DLL application.
+ * @author Jarmo Erola
+ * @version 0.1
+ */
+
 #include "stdafx.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,

@@ -1,4 +1,4 @@
-/* 
+/** 
  * @file Registry.h
  * Registry class header file
  * @author Jarmo Erola
@@ -33,7 +33,7 @@ public:
 	/**
 	 * Sets the data of a specified value under a registry key.
 	 * @param key The name of the value to be set.
-	 * @param strKey The data to be stored. 
+	 * @param value The data to be stored. 
 	 */
 	void write(LPCTSTR key, const char* value);
 	/**

@@ -1,4 +1,4 @@
-/* 
+/** 
  * @file Registry.cpp
  * Registry class resource file
  * @author Jarmo Erola
@@ -82,7 +82,7 @@ std::string Registry::read(LPCTSTR key){
 /**
  * Sets the data of a specified value under a registry key.
  * @param key The name of the value to be set.
- * @param strKey The data to be stored. 
+ * @param value The data to be stored. 
  */
 void Registry::write(LPCTSTR key, const char* value){
 	string strValue(value);

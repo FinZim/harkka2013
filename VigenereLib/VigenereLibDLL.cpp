@@ -1,4 +1,4 @@
-/* 
+/** 
  * @file VigenereLibDLL.cpp
  * Vigenere DLL library resource file
  * @author Jarmo Erola
@@ -6,100 +6,85 @@
  */
 
 #include "stdafx.h"
-#include "VigenereLibDll.h"
 #include <iostream>
 #include <string>
 #include <stdexcept>
 
+#include "VigenereLibDll.h"
+
 using namespace std;
 
-namespace nsVigenere {
+/**
+ * A constructor
+ * @param key Default key for encryption.
+ */
+Vigenere::Vigenere(string key){
 
-	/**
-	 * A constructor
-	 * @param key Default key for encryption.
-	 */
-	Vigenere::Vigenere(char* key){
-
-		string strkey(key);
-
-		for(int i = 0; i < strkey.size(); ++i){
-			if(strkey[i] >= 'A' && strkey[i] <= 'Z'){
-				this->key += strkey[i];
-			}
-			else if(strkey[i] >= 'a' && strkey[i] <= 'z'){
-				this->key += strkey[i] + 'A' - 'a';
-			}
+	for(int i = 0; i < key.size(); ++i){
+		if(key[i] >= 'A' && key[i] <= 'Z'){
+			this->key += key[i];
 		}
-
+		else if(key[i] >= 'a' && key[i] <= 'z'){
+			this->key += key[i] + 'A' - 'a';
+		}
 	}
 
-	/**
-	 * Sets a key to private variable
-	 * @param key A key.
-	 */
-	void Vigenere::setKey(char* _key){
-		this->key = _key;
-	}
+}
 
-	/**
-	 * Encrypt given text
-	 * @param txt A text to encrypt.
-	 */
-	const char* Vigenere::encrypt(char* txt){
-		string out;
-		string strtxt(txt);
+/**
+ * Sets a key to private variable
+ * @param key A key.
+ */
+void Vigenere::setKey(string key){
+	this->key = key;
+}
 
-		cout << "This is encrypt. " << strtxt << endl;
-
-		string key = this->key;
+/**
+ * Encrypt given text
+ * @param txt A text to encrypt.
+ */
+string Vigenere::encrypt(string txt){
+	string output;
+	string key = this->key;
  
-		for(int i = 0, j = 0; i < strtxt.length(); ++i){
-			char c = strtxt[i];
+	for(int i = 0, j = 0; i < txt.length(); ++i){
+		char c = txt[i];
 	
-			if(c >= 'a' && c <= 'z'){
-				c += 'A' - 'a';
-			}
-			else if(c < 'A' || c > 'Z'){
-				continue;
-			}
+		if(c >= 'a' && c <= 'z'){
+			c += 'A' - 'a';
+		}
+		else if(c < 'A' || c > 'Z'){
+			continue;
+		}
 		
-			out += (c + key[j] - 2*'A') % 26 + 'A'; 
-			j = (j + 1) % key.length();
+		output += (c + key[j] - 2*'A') % 26 + 'A'; 
+		j = (j + 1) % key.length();
+	}
+ 
+	return output;
+}
+
+/**
+ * Decrypt given text
+ * @param txt A text to decrypt.
+ */
+string Vigenere::decrypt(string txt){
+	string output;
+	string key = this->key;
+ 
+	for(int i = 0, j = 0; i < txt.length(); ++i){
+		char c = txt[i];
+ 
+		if(c >= 'a' && c <= 'z'){
+			c += 'A' - 'a';
+		}
+		else if(c < 'A' || c > 'Z'){
+			continue;
 		}
  
-		const char* output = out.c_str();
-
-		cout << "This is encrypt. " << output << endl;
-
-		return output;
+		output += (c - key[j] + 26) % 26 + 'A'; 
+		j = (j + 1) % key.length();
 	}
-
-	/**
-	 * Decrypt given text
-	 * @param txt A text to decrypt.
-	 */
-	const char* Vigenere::decrypt(char* txt){
-		string out;
-		string strtxt(txt);
-
-		string key = this->key;
  
-		for(int i = 0, j = 0; i < strtxt.length(); ++i){
-			char c = strtxt[i];
- 
-			if(c >= 'a' && c <= 'z'){
-				c += 'A' - 'a';
-			}
-			else if(c < 'A' || c > 'Z'){
-				continue;
-			}
- 
-			out += (c - key[j] + 26) % 26 + 'A'; 
-			j = (j + 1) % key.length();
-		}
- 
-		const char* output = out.c_str();
-		return output;
-	}
+	return output;
 }

@@ -1,4 +1,4 @@
-/* 
+/** 
  * @file SimpleCrypt.cpp
  * SimpleCrypt encryption software main file
  * @author Jarmo Erola
@@ -96,13 +96,20 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[]){
 		cout << "Welcome to SimpleCrypt " << VERSION << endl;
 
 		if(key != ""){
-			string readedKey;
+			string readedKey, encrypted, decrypted;
 
 			Registry *reg = new Registry(HKEY_CURRENT_USER, L"Software\\SimpleCrypt");
 			reg->write(L"DefaultKey", key.c_str());
 
 			readedKey = reg->read(L"DefaultKey");
 			cout << "Readed key: #" << readedKey << "#" << endl;
+
+			Vigenere *vig = new Vigenere(readedKey);
+			encrypted = vig->encrypt("This is some text to be encrypted!!");
+			decrypted = vig->decrypt(encrypted);
+
+			cout << "Text: " << "This is some text to be encrypted!!" << endl;
+			cout << "Encrypted: " << encrypted << endl << "Decrypted: " << decrypted << endl;
 		}
 
 	}
