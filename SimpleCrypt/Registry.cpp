@@ -1,7 +1,6 @@
 
 #include <Windows.h>
 #include <iostream>
-#include <stdio.h>
 #include <string>
 #include <tchar.h>
 
@@ -25,28 +24,18 @@ Registry::Registry(HKEY hRootKey, wchar_t* strKey){
 	this->hKey = hKey;
 }
 
-const char* Registry::read(LPCTSTR key){
-	const char* output = "";
-
+DWORD Registry::read(LPCTSTR key){
+	DWORD data;
+	DWORD size = sizeof(data);
 	DWORD type = REG_SZ;
-	char buffer[64] = {0};
-	DWORD lpcbData = sizeof(buffer);
+	LONG nError = RegQueryValueEx(this->hKey, key, NULL, &type, (LPBYTE)&data, &size);
 
-	LONG nError = RegQueryValueEx(this->hKey, key, NULL, &type, (PBYTE)&buffer, &lpcbData);
+	if (nError==ERROR_FILE_NOT_FOUND)
+		data = 0; // The value will be created and set to data next time SetVal() is called.
+	else if (nError)
+		cout << "Error: " << nError << " Could not get registry value " << (char*)key << endl;
 
-	if (nError == ERROR_SUCCESS){
-		cout << "Success reading the Registry." << endl;
-
-		for(int i=0; i<sizeof(buffer); i++){
-			if(buffer[i] != NULL){
-				output += buffer[i];
-			}
-		}
-	}else{
-		cout << "Error reading the Registry." << endl;
-	}
-
-	return output;
+	return data;
 }
 
 void Registry::write(LPCTSTR key, const char* value){

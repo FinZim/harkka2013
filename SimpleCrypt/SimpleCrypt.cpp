@@ -75,13 +75,11 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[]){
 		cout << "Welcome to SimpleCrypt " << VERSION << endl;
 
 		if(key != ""){
-			const char* readedKey;
+			DWORD dKey, readedKey;
 
-			Registry *reg = new Registry(HKEY_CURRENT_USER, L"Software\\SimpleCrypt");
-			reg->write(L"DefaultKey", key.c_str());
+			Registry reg(HKEY_CURRENT_USER, L"Software\\SimpleCrypt");
+			reg.write(L"DefaultKey", key.c_str());
 
-			readedKey = reg->read(L"DefaultKey");
-			cout << "Readed key: " << readedKey << endl;
 		}
 
 	}
