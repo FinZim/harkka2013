@@ -4,52 +4,51 @@
  * @author Kim Kostera
  * @version 0.1
  */
-
+#include <Windows.h>
 #include <fstream>
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
 #include <string>
 #include <cctype>
-
 #include "File.h"
 
 using  namespace std;
 
-int main()
-{
-	string myFile::read(string filename){
+	/**
+	* File Read and gather data to string.
+	*/
 
-		ifstream myFile("file.txt");
+	string File::read(string filename){
 
-		if (myFile.is_open())
-		{
-			while (! myFile.eof())
-			{
-				getline (myFile,line);
+		std::string line;
 
+		ifstream File("file.txt");
+		if (File.is_open()){
+			while (! File.eof()){
+
+				std::getline(File,line);
 				cout << line << endl;
+				line.append(line);
 			}
-
-			myFile.close();
+			File.close();
+			line.append(line);
 		}
-
 		else cout << " Unable to open file ";
-
+		
 	}
-}
 
-	void myFile::write(string filename, string data){
+	/**
+	* File write from the gathered string data.
+	*/
 
-		ofstream myFile;
+	void File::write(string filename, string data){
 
-		myFile.open ("file.txt");
+		ofstream File("file.txt");
+		if(File.is_open()){
 
-		if(myFile.is_open()){
-
-			myFile << endl;
-
-			myFile.close();
+			File << endl;
+			File.close();
 	}
 		else
 		{
@@ -57,5 +56,3 @@ int main()
 		}
 	}
 
-	return 0;
-}

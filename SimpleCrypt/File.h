@@ -10,18 +10,16 @@
 
 class File {
 
-public:
+	public:
 	
-	string readFile(string filename);{
-		ifstream myFile();
-	}
-	
-	void writeFile(string filename ){   
-		ofstream myFile;
-		myFile.open ("file.txt");
-		myFile << endl;
-		myFile.close();
+		/**
+		* Method for read
+		*/
+		std::string read(std::string filename);
 		
-	}
-
-};
+		/**
+		* Method for write
+		*/				
+		void write(std::string filename, std::string data);
+			
+	};
